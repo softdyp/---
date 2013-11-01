@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>my web</title>
+        <style>
+            body{background:black;}
+            #c1{background:white;}
+            span{color:white;}
+        </style>
+        <script>
+        
+            window.onload= function(){
+                var oC = document.getElementById('c1');
+                
+                var oGC = oC.getContext('2d');
+                
+                oGC.fillStyle='red';
+                
+                oGC.strokeStyle='blue';
+                
+                oGC.lineWidth=10;
+                
+                oGC.lineJoin = 'round';
+                
+                oGC.fillRect(50.5,50.5,100,100);
+                
+                oGC.strokeRect(50.5,50.5,100,100);
+                
+            };
+            
+        </script>
+    </head>
+   
+    <body>
+        <canvas id="c1" width="400" height="400">      
+            <span>不支持canva的浏览器</span>          
+        </canvas><!--  默认宽300，高150-->
+    </body>
+</html>
