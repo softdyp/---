@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>my web</title>
+        <style>
+            body{background:black;}
+            #c1{background:white;}
+            span{color:white;}
+        </style>
+        <script>
+        
+            window.onload= function(){
+                var oC = document.getElementById('c1');
+                
+                var oGC = oC.getContext('2d');
+                
+//                 oGC.moveTo(100,200);
+                
+//                oGC.quadraticCurveTo(100,100,200,100);
+//                //x1,y1,x2,y2
+//                //x1,y1,代表第一组控制点；
+//                //x2,y2,代表第二组结束坐标；
+//                //控制点拉着弧线偏移
+                  
+                oGC.moveTo(100,200);
+                
+                oGC.bezierCurveTo(100,100,200,200,200,100);
+                 //x1,y1,x2,y2,dx，dy
+               //x1,y1,代表第一组控制点；
+              //x2,y2,代表第二组控制点；
+               // dx，dy结束坐标
+           //控制点拉着弧线偏移
+                
+                oGC.stroke();
+                
+               
+              
+     
+            };
+            
+        </script>
+    </head>
+   
+    <body>
+        <canvas id="c1" width="400" height="400">      
+            <span>不支持canva的浏览器</span>          
+        </canvas><!--  默认宽300，高150-->
+    </body>
+</html>
