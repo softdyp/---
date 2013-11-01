@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <title>my web</title>
+        <style>
+            body {
+                background:black;
+                color: white;
+                font-size:30px;
+            }
+            #c1 {
+                background:white;
+            }
+            span {
+                color:white;
+            }
+        </style>
+        <script>
+            window.onload = function() {
+                var oC = document.getElementById('c1');
+
+                var oGC = oC.getContext('2d');
+                
+                var yImg = new Image();
+                
+                yImg.onload = function(){
+                    
+                    draw(this);
+                
+                };
+                
+                yImg.src = '1.png';
+                
+                function draw(obj){
+                    oC.width=obj.width;
+                    oGC.drawImage(obj,0,0);
+                    
+                    var oImg = oGC.getImageData(0,0,obj.width,obj.height);
+                    
+                    var w = oImg.width;
+                    var h = oImg.height;
+                    
+                    var newImg = oGC.createImageData(obj.width,obj.height);
+                    
+                    for(var i =0;i<h;i++){
+                        for(var j=0;j<w;j++){
+                            
+                            var result=[];
+                            
+                            var color = getXY(oImg,j,i);
+                            
+                            result[0]=255-color[0];
+                            result[1]=255-color[1];
+                            result[2]=255-color[2];
+                            result[3]=255*i/h;
+                            
+                            setXY(newImg,j,h-i,result);
+                        
+                        }
+                    
+                    }
+                    
+                    oGC.putImageData(newImg,0,obj.height);
+                
+                };
+                
+                function getXY(obj,x,y){//针对一行一列进行操作
+                    
+                    var w = obj.width;
+                    var h = obj.color;
+                    var d = obj.data;
+                    
+                    var color = [];
+                    
+                    color[0] = d[4*(y*w+x)];
+                    color[1] = d[4*(y*w+x)+1];
+                    color[2] = d[4*(y*w+x)+2];
+                    color[3] = d[4*(y*w+x)+3];
+                    
+                    return color;
+                }
+                
+                function setXY(obj,x,y,color){
+                
+                    var w = obj.width;
+                    var h = obj.color;
+                    var d = obj.data;
+                    
+                    
+                    d[4*(y*w+x)]=color[0] ;
+                    d[4*(y*w+x)+1]=color[1];
+                    d[4*(y*w+x)+2]=color[2];
+                    d[4*(y*w+x)+3]=color[3];
+                    
+                   
+                }
+
+               
+            };
+        </script>
+    </head>
+    
+    <body>
+        <canvas id="c1" width="400" height="800">
+            <span>不支持canva的浏览器</span>
+        </canvas>
+        <!-- 默认宽300，高150-->
+    </body>
+
+</html>
